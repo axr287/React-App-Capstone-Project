@@ -13,6 +13,8 @@ import Menu from "./Menu.js";
 
 export default function WelcomeScreen({ navigation, route }) {
   const { email } = route.params || {};
+  const { firstName } = route.params || {};
+  const { lastName } = route.params || {};
   const routing = useRoute();
 
   return (
@@ -21,7 +23,9 @@ export default function WelcomeScreen({ navigation, route }) {
       <HeroSection />
       <Menu />
       <Pressable
-        onPress={() => navigation.navigate("Profile", { email })}
+        onPress={() =>
+          navigation.navigate("Profile", { email, firstName, lastName })
+        }
         style={styles.button}
       >
         <Text style={styles.buttonText}>Profile</Text>

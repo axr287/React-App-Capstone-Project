@@ -11,36 +11,66 @@ import HeroSection from "./HeroSection.js";
 import LittleLemonHeader from "./LittleLemonHeader.js";
 
 export default function LoginScreen({ navigation }) {
+  const [firstName, onChangeFirstName] = useState("");
+  const [lastName, onChangeLastName] = useState("");
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
-  const isFormValid = email.trim() !== "" && password.trim() !== "";
+
+  const isFormValid =
+    firstName.trim() !== "" &&
+    lastName.trim() !== "" &&
+    email.trim() !== "" &&
+    password.trim() !== "";
+
   const route = useRoute();
 
   return (
     <ScrollView style={styles.container}>
       <LittleLemonHeader currentRoute={route.name} />
-
       <HeroSection />
-      <Text style={styles.name}>Name *</Text>
+
+      <Text style={styles.name}>First Name *</Text>
+      <TextInput
+        style={styles.inputBox}
+        value={firstName}
+        onChangeText={onChangeFirstName}
+        placeholder={"First Name"}
+      />
+
+      <Text style={styles.name}>Last Name *</Text>
+      <TextInput
+        style={styles.inputBox}
+        value={lastName}
+        onChangeText={onChangeLastName}
+        placeholder={"Last Name"}
+      />
+
+      <Text style={styles.name}>Email *</Text>
       <TextInput
         style={styles.inputBox}
         value={email}
         onChangeText={onChangeEmail}
-        placeholder={"email"}
+        placeholder={"Email"}
         keyboardType={"email-address"}
       />
-      <Text style={styles.name}>Email *</Text>
 
+      <Text style={styles.name}>Password *</Text>
       <TextInput
         style={styles.inputBox}
         value={password}
         onChangeText={onChangePassword}
-        placeholder={"password"}
-        keyboardType={"default"}
+        placeholder={"Password"}
         secureTextEntry={true}
       />
+
       <Pressable
-        onPress={() => navigation.navigate("Welcome", { email })}
+        onPress={() =>
+          navigation.navigate("Welcome", {
+            firstName,
+            lastName,
+            email,
+          })
+        }
         style={styles.button}
         disabled={!isFormValid}
       >

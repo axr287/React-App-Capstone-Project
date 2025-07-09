@@ -53,9 +53,15 @@ export default function Profile({ route, navigation }) {
           return acc;
         }, {});
 
-        // If email was passed from login screen, use it
+        // If values were passed from login screen, use them
         if (route?.params?.email) {
           profileParsed.email = route.params.email;
+        }
+        if (route?.params?.firstName) {
+          profileParsed.firstName = route.params.firstName;
+        }
+        if (route?.params?.lastName) {
+          profileParsed.lastName = route.params.lastName;
         }
 
         setProfile(profileParsed);
