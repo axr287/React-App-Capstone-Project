@@ -87,6 +87,23 @@ export default function Profile({ route, navigation }) {
     }));
   };
 
+  const formatPhoneNumber = (text) => {
+    const cleaned = text.replace(/\D/g, "").slice(0, 10);
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+    if (!match) return text;
+
+    const [, area, prefix, line] = match;
+    if (line) return `(${area}) ${prefix}-${line}`;
+    if (prefix) return `(${area}) ${prefix}`;
+    if (area) return `(${area}`;
+    return "";
+  };
+
+  const isValidUSPhone = (text) => {
+    const cleaned = text.replace(/\D/g, "");
+    return cleaned.length === 10;
+  };
+
   const saveChanges = async () => {
     try {
       const notifEntries = Object.entries(selectedOptions).map(([k, v]) => [
@@ -143,13 +160,26 @@ export default function Profile({ route, navigation }) {
         />
 
         <Text style={styles.subheader}>Phone Number</Text>
+
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
           value={profile.phone}
-          onChangeText={(text) => handleProfileChange("phone", text)}
+          onChangeText={(text) => {
+            const formatted = formatPhoneNumber(text);
+            handleProfileChange("phone", formatted);
+
+            const cleaned = text.replace(/\D/g, "");
+            if (cleaned.length === 10 && !isValidUSPhone(text)) {
+              Alert.alert(
+                "Invalid Phone Number",
+                "Please enter a valid US phone number."
+              );
+            }
+          }}
           keyboardType="phone-pad"
         />
+
         <Text style={styles.header}>Email Notifications</Text>
 
         {NOTIFICATION_OPTIONS.map(({ key, label }) => (

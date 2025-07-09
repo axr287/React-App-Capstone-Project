@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   regularText: {
     fontSize: 24,
-    padding: 20,
+    padding: 15,
     marginVertical: 8,
     color: "#EDEFEE",
     textAlign: "center",
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
-    padding: 10,
+    padding: 7,
     fontSize: 16,
     borderColor: "gray",
     borderRadius: 5,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   button: {
     fontSize: 22,
     padding: 10,
-    paddingTop: 15,
+    paddingTop: 10,
     marginVertical: 8,
     margin: 100,
     backgroundColor: "#F4CE14",
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     fontFamily: "Karla_400Regular",
   },
   name: {
-    paddingTop: 10,
+    paddingTop: 5,
     paddingLeft: 10,
     fontFamily: "Karla_400Regular",
     padding: 5,
